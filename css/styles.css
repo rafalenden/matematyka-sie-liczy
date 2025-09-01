@@ -226,6 +226,12 @@ li {
   transition: var(--transition-default);
 }
 
+/* Make obfuscated placeholders clearly clickable */
+.contact-list__link.phone-obf,
+.contact-list__link.email-obf {
+  cursor: pointer;
+}
+
 .contact-list__link:active,
 .contact-list__link:focus,
 .contact-list__link:hover {

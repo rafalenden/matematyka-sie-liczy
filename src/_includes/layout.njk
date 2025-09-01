@@ -25,7 +25,17 @@
     <h2 class="site-subtitle">{{ intro | safe }}</h2>
     <ul class="contact-list" aria-label="Informacje kontaktowe">
       {% for details in contact_details %}
-      <li class="contact-list__item"><a href="{{ details.url | safe }}" aria-label="{{ details.text | safe }}" class="contact-list__link">{{ details.text | safe }}</a></li>
+        {% if details.type == 'phone' %}
+          <li class="contact-list__item">
+            <span class="contact-list__link phone-obf" data-enc="{{ details.enc | safe }}" data-rev="{{ details.rev | safe }}" aria-label="Telefon" aria-live="polite">Pokaż telefon</span>
+          </li>
+        {% elif details.type == 'email' %}
+          <li class="contact-list__item">
+            <span class="contact-list__link email-obf" data-b64="{{ details.b64 | safe }}" aria-label="E-mail" aria-live="polite">Pokaż e‑mail</span>
+          </li>
+        {% else %}
+          <li class="contact-list__item"><span class="contact-list__link">—</span></li>
+        {% endif %}
       {% endfor %}
     </ul>
   </div>
@@ -66,6 +76,96 @@
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
+      });
+    });
+    // Phone number: reveal on click (not on load)
+    const phoneSpans = document.querySelectorAll('.phone-obf[data-enc]');
+    phoneSpans.forEach(function(el){
+      // Make it accessible as a button
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+
+      const alphabet = 'qwertyuiop'; // allowed code letters only
+      const codeDigits = '7145092863'; // mapping for q->7, w->1, ..., p->6
+      const map = Object.fromEntries(alphabet.split('').map((ch, i) => [ch, codeDigits[i]]));
+
+      function decodeDigits() {
+        let enc = String(el.getAttribute('data-enc') || '');
+        // keep only allowed letters; other chars are noise
+        let filtered = enc.split('').filter(ch => alphabet.includes(ch)).join('');
+        // optionally reverse (based on data attr)
+        const rev = el.getAttribute('data-rev');
+        if (rev === 'true' || rev === '1') {
+          filtered = filtered.split('').reverse().join('');
+        }
+        // map letters -> digits
+        const digits = filtered.split('').map(ch => map[ch]).join('');
+        return digits;
+      }
+
+      function formatPretty(digits) {
+        return digits.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+      }
+
+      function revealPhone() {
+        try {
+          const raw = decodeDigits();
+          if (!/^\d{9}$/.test(raw)) throw new Error('Decode failed');
+          const pretty = formatPretty(raw);
+          // Replace with a clickable tel link
+          const a = document.createElement('a');
+          a.className = 'contact-list__link';
+          a.href = 'tel:' + raw;
+          a.textContent = pretty;
+          a.setAttribute('aria-label', 'Telefon: ' + pretty);
+          el.replaceWith(a);
+        } catch (e) {
+          el.style.display = 'none';
+        }
+      }
+
+      el.addEventListener('click', function onClick(){
+        el.removeEventListener('click', onClick);
+        revealPhone();
+      });
+      el.addEventListener('keydown', function onKey(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.removeEventListener('keydown', onKey);
+          revealPhone();
+        }
+      });
+    });
+
+    // Email: reveal on click (Base64 decode)
+    const emailSpans = document.querySelectorAll('.email-obf[data-b64]');
+    emailSpans.forEach(function(el){
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      function revealEmail(){
+        try {
+          const email = atob(el.getAttribute('data-b64') || '');
+          if (!/.+@.+\..+/.test(email)) throw new Error('Bad email');
+          const a = document.createElement('a');
+          a.className = 'contact-list__link';
+          a.href = 'mailto:' + email;
+          a.textContent = email;
+          a.setAttribute('aria-label', 'E-mail: ' + email);
+          el.replaceWith(a);
+        } catch (e) {
+          el.style.display = 'none';
+        }
+      }
+      el.addEventListener('click', function onClick(){
+        el.removeEventListener('click', onClick);
+        revealEmail();
+      });
+      el.addEventListener('keydown', function onKey(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.removeEventListener('keydown', onKey);
+          revealEmail();
+        }
       });
     });
   });

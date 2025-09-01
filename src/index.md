@@ -3,8 +3,11 @@ layout: layout.njk
 title: "Matematyka Się Liczy"
 intro: "Małgorzata Świątek"
 contact_details:
-  - url: "mailto:kontakt@matematykasieliczy.pl"
-    text: "kontakt@matematykasieliczy.pl"
+  - type: "email"
+    b64: "a29udGFrdEBtYXRlbWF0eWthc2llbGljenkucGw="
+  - type: "phone"
+    enc: "rprttqyot"
+    rev: false
 ---
 Zapraszam na zajęcia z nauczycielką, absolwentką Politechniki Wrocławskiej po kierunku Matematyka Stosowana i Matematyki Nauczycielskiej Uniwersytetu Pedagogicznego w Krakowie.
 
