@@ -45,10 +45,7 @@ Stawiam na zrozumienie, dbam o to, abyś nie zapomniał/a tego, czego już się 
 
 Mam doświadczenie w układaniu i sprawdzaniu testów, prac semestralnych, sprawdzianów i kartkówek, więc jestem świadoma, na co zwrócić uwagę przy przygotowaniu Cię do nich.
 
-{% lars "Lars - Golden Retriever, matematyczny asystent", "/images/lars-small.jpg", "/images/lars.jpg" %}
 
-**A jeśli matematyka nadal wydaje Ci się stresująca** – poznaj Larsa, mojego uroczego Goldena Retrievera! Udowodniono naukowo, że głaskanie psa obniża poziom stresu o 37%, a Lars jest ekspertem w pocieszaniu podczas rozwiązywania najtrudniejszych równań.
-{% endlars %}
 
 ## Czego możesz spodziewać się na spotkaniach?
 
