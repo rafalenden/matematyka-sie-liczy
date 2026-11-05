@@ -14,15 +14,17 @@
   <link rel="icon" type="image/svg+xml" href="/images/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@500..700&family=Raleway:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <header class="site-header">
+  <div class="hero-symbols" aria-hidden="true"><span>∑</span><span>π</span><span>√</span><span>∞</span><span>÷</span><span>x²</span><span>∫</span><span>=</span></div>
   <div class="site-header__container">
-    <img alt="Matematyka Się Liczy - Logo" class="site-logo" src="/images/logo.svg">
-    <h1 class="site-title">{{ title }}</h1>
-    <h2 class="site-subtitle">{{ intro }}</h2>
+    <img alt="Matematyka Się Liczy - Logo" class="site-logo" src="/images/logo-candy.svg">
+    {% set words = title.split(" ") %}
+    <h1 class="site-title">{{ words.slice(0, -1).join(" ") }} <mark>{{ words | last }}</mark></h1>
+    <h2 class="site-subtitle">{{ subtitle }}</h2>
     <ul class="contact-list" aria-label="Informacje kontaktowe">
       {# Contact details are base64-encoded against scrapers; js/main.js reveals them on click #}
       {% if contact.email %}
@@ -36,6 +38,7 @@
 </header>
 <main>
   <div class="container">
+    {% if intro %}<p class="lead">{{ intro }}</p>{% endif %}
     {{ content | safe }}
   </div>
 </main>

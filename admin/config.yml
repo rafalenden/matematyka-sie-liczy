@@ -22,7 +22,8 @@ collections:
         fields:
           - { name: layout, widget: hidden, default: layout.njk }
           - { name: title, label: Tytuł, widget: string }
-          - { name: intro, label: Podtytuł, widget: string }
+          - { name: subtitle, label: Podtytuł, widget: string }
+          - { name: intro, label: Intro, widget: text, required: false, hint: Wprowadzenie wyświetlane pod przyciskami kontaktu. }
           - name: contact
             label: Kontakt
             widget: object
