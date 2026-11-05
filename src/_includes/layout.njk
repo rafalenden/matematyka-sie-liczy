@@ -24,25 +24,42 @@
     <h1 class="site-title">{{ title | safe }}</h1>
     <h2 class="site-subtitle">{{ intro | safe }}</h2>
     <ul class="contact-list" aria-label="Informacje kontaktowe">
-      {% for details in contact_details %}
-        {% if details.type == 'phone' %}
-          <li class="contact-list__item">
-            <span class="contact-list__link phone-obf" data-enc="{{ details.enc | safe }}" data-rev="{{ details.rev | safe }}" aria-label="Telefon" aria-live="polite">Pokaż telefon</span>
-          </li>
-        {% elif details.type == 'email' %}
-          <li class="contact-list__item">
-            <span class="contact-list__link email-obf" data-b64="{{ details.b64 | safe }}" aria-label="E-mail" aria-live="polite">Pokaż e‑mail</span>
-          </li>
-        {% else %}
-          <li class="contact-list__item"><span class="contact-list__link">—</span></li>
-        {% endif %}
-      {% endfor %}
+      {% if contact.email %}
+        <li class="contact-list__item">
+          <span class="contact-list__link email-obf" data-b64="{{ contact.email | base64 }}" aria-label="E-mail" aria-live="polite">Pokaż e‑mail</span>
+        </li>
+      {% endif %}
+      {% if contact.phone %}
+        <li class="contact-list__item">
+          <span class="contact-list__link phone-obf" data-enc="{{ contact.phone | phoneEnc }}" data-rev="false" aria-label="Telefon" aria-live="polite">Pokaż telefon</span>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </header>
 <main>
   <div class="container">
     {{ content | safe }}
+    {% if testimonials.items and testimonials.items.length %}
+    <h2>{{ testimonials.heading }}</h2>
+    <div class="testimonials-grid">
+      {% for item in testimonials.items %}
+      <div class="testimonial card">
+        <blockquote class="testimonial__quote">"{{ item.quote }}"</blockquote>
+        <div class="testimonial__author">
+          <strong class="testimonial__author-name">{{ item.author }}</strong>
+          <em class="testimonial__author-info">{{ item.description }}</em>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if testimonials.cta and testimonials.cta.url %}
+    <div class="testimonials-cta">
+      <h3 class="testimonials-cta__title">{{ testimonials.cta.title }}</h3>
+      <a href="{{ testimonials.cta.url }}" class="button">{{ testimonials.cta.link_text }}</a>
+    </div>
+    {% endif %}
   </div>
 </main>
 <footer class="site-footer">&copy; {% year %} Matematyka Się Liczy</footer>

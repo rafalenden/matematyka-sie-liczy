@@ -17,25 +17,32 @@ module.exports = function(eleventyConfig) {
         }
     });
 
+    // Zabezpieczenie danych kontaktowych przed botami: w CMS i repozytorium są zapisane
+    // zwykłym tekstem, a na stronie trafiają zakodowane (dekodowane w layout.njk po kliknięciu).
+    eleventyConfig.addFilter("base64", (value) => Buffer.from(String(value || ""), "utf8").toString("base64"));
+    eleventyConfig.addFilter("phoneEnc", (value) => {
+        let digits = String(value || "").replace(/\D/g, "");
+        if (digits.length === 11 && digits.startsWith("48")) digits = digits.slice(2); // +48
+        const letters = { 7: "q", 1: "w", 4: "e", 5: "r", 0: "t", 9: "y", 2: "u", 8: "i", 6: "o", 3: "p" };
+        return digits.split("").map((d) => letters[d]).join("");
+    });
+
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("images");
     eleventyConfig.addPassthroughCopy("js");
+    eleventyConfig.addPassthroughCopy("admin");
 
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
-    // Dodanie paired shortcode dla sekcji cennika
-    eleventyConfig.addPairedShortcode("prices", function(content) {
-        return `<div class="pricing-grid">${content}</div>`;
-    });
-
-    // Dodanie shortcode dla cennika z pozycyjnymi parametrami
+    // Karta cennika. Kolejne karty są automatycznie grupowane w siatkę (patrz transform niżej).
+    // Edytowalna w Sveltia CMS jako komponent "Pozycja cennika".
     eleventyConfig.addShortcode("price", function(title, price, duration, description) {
-        return `<div class="pricing-card card">
-            <h3 class="pricing-card__title">${title}</h3>
-            <div class="pricing-card__price">${price}</div>
-            <p class="pricing-card__description">${duration}</p>
-            <p class="pricing-card__description">${description}</p>
-        </div>`;
+        return `<div class="pricing-card card" data-grid="pricing-grid">`
+            + `<h3 class="pricing-card__title">${title}</h3>`
+            + `<div class="pricing-card__price">${price}</div>`
+            + `<p class="pricing-card__description">${duration}</p>`
+            + `<p class="pricing-card__description">${description}</p>`
+            + `<!--/card--></div>`;
     });
 
     // Dodanie paired shortcode dla sekcji z Larsem
@@ -52,28 +59,14 @@ module.exports = function(eleventyConfig) {
         </div>`;
     });
 
-    // Dodanie shortcode dla pojedynczej opinii z pozycyjnymi parametrami
-    eleventyConfig.addShortcode("testimonial", function(quote, author, description) {
-        return `<div class="testimonial card">
-            <blockquote class="testimonial__quote">"${quote}"</blockquote>
-            <div class="testimonial__author">
-                <strong class="testimonial__author-name">${author}</strong>
-                <em class="testimonial__author-info">${description}</em>
-            </div>
-        </div>`;
-    });
-
-    // Dodanie paired shortcode dla sekcji opinii
-    eleventyConfig.addPairedShortcode("testimonials", function(content) {
-        return `<div class="testimonials-grid">${content}</div>`;
-    });
-
-    // Dodanie shortcode dla przycisku CTA pod opiniami
-    eleventyConfig.addShortcode("testimonialsCta", function(text, linkText, url) {
-        return `<div class="testimonials-cta">
-            <h3 class="testimonials-cta__title">${text}</h3>
-            <a href="${url}" class="button">${linkText}</a>
-        </div>`;
+    // Owija sąsiadujące karty (cennik) w kontener siatki, dzięki czemu
+    // w Markdown nie są potrzebne znaczniki otwierające/zamykające sekcję.
+    eleventyConfig.addTransform("cardGrids", function(content) {
+        if (!(this.page.outputPath || "").endsWith(".html")) return content;
+        return content.replace(
+            /(?:<div class="[^"]*" data-grid="([\w-]+)">[\s\S]*?<!--\/card--><\/div>\s*)+/g,
+            (run, grid) => `<div class="${grid}">${run.trim()}</div>\n`
+        );
     });
 
     return {

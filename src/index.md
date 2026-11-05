@@ -2,12 +2,28 @@
 layout: layout.njk
 title: "Matematyka Się Liczy"
 intro: "Małgorzata Świątek"
-contact_details:
-  - type: "email"
-    b64: "a29udGFrdEBtYXRlbWF0eWthc2llbGljenkucGw="
-  - type: "phone"
-    enc: "rprttqyot"
-    rev: false
+contact:
+  email: "kontakt@matematykasieliczy.pl"
+  phone: "535 007 960"
+testimonials:
+  heading: "Opinie"
+  items:
+    - quote: "Bardzo miła atmosfera na zajęciach. Dzięki pani Małgosi byłam bardzo dobrze przygotowana do egzaminu ósmoklasisty oraz poszerzyłam swoją wiedzę. Gorąco polecam :))"
+      author: "Paulina"
+      description: "Szkoła podstawowa"
+    - quote: "Lekcje z Panią Małgosią przygotowały mnie do egzaminu ósmoklasisty. Dzięki tym zajęciom nauczyłam się wielu przydatnych rzeczy do egzaminu oraz liceum."
+      author: "Kalina"
+      description: "Szkoła podstawowa"
+    - quote: "Bardzo dobra korepetytorka, pomagała mi w nauce od końca szkoły podstawowej do zakończenia nauki w liceum. Pomogła zrozumieć matematykę i zachęcić do niej. Polecam"
+      author: "Norbert"
+      description: "Szkoła podstawowa oraz liceum"
+    - quote: "Pani Małgosia nie tylko pomogła mi przygotować się do matury, ale także do egzaminów poprawkowych. Gorąco polecam wszystkim, którzy chcą zrozumieć i polubić matematykę jako przedmiot."
+      author: "Przemek"
+      description: "Matura"
+  cta:
+    title: "Chcesz zobaczyć więcej opinii?"
+    link_text: "Zobacz wszystkie opinie"
+    url: "https://www.e-korepetycje.net/malgorzata-swiatek/matematyka#opinie"
 ---
 Zapraszam na zajęcia z nauczycielką, absolwentką Politechniki Wrocławskiej po kierunku Matematyka Stosowana i Matematyki Nauczycielskiej Uniwersytetu Pedagogicznego w Krakowie.
 
@@ -48,8 +64,6 @@ Stawiam na zrozumienie, dbam o to, abyś nie zapomniał/a tego, czego już się 
 
 Mam doświadczenie w układaniu i sprawdzaniu testów, prac semestralnych, sprawdzianów i kartkówek, więc jestem świadoma, na co zwrócić uwagę przy przygotowaniu Cię do nich.
 
-
-
 ## Czego możesz spodziewać się na spotkaniach?
 
 - Zależy mi na tym, abyś na naszych zajęciach czuł/a się dobrze. Dlatego dbam o dobrą atmosferę.
@@ -64,11 +78,11 @@ Zajęcia stacjonarne odbywają się we Wrocławiu. Z kolei te online prowadzę u
 
 ### Cennik
 
-{% prices %}
 {% price "Szkoła podstawowa", "100 zł", "60 minut", "Klasy 6, 7 i 8" %}
+
 {% price "Liceum", "110 zł", "60 minut", "Klasy I, II i III" %}
+
 {% price "Matura", "120 zł", "60 minut", "Poziom podstawowy i rozszerzony" %}
-{% endprices %}
 
 **Zajęcia grupowe** - ceny do uzgodnienia
 
@@ -85,17 +99,3 @@ Zajęcia stacjonarne odbywają się we Wrocławiu. Z kolei te online prowadzę u
 | Piątek         | Do uzgodnienia|
 | Sobota         | Wolne         |
 | Niedziela      | Wolne         |
-
-## Opinie
-
-{% testimonials %}
-{% testimonial "Bardzo miła atmosfera na zajęciach. Dzięki pani Małgosi byłam bardzo dobrze przygotowana do egzaminu ósmoklasisty oraz poszerzyłam swoją wiedzę. Gorąco polecam :))", "Paulina", "Szkoła podstawowa" %}
-
-{% testimonial "Lekcje z Panią Małgosią przygotowały mnie do egzaminu ósmoklasisty. Dzięki tym zajęciom nauczyłam się wielu przydatnych rzeczy do egzaminu oraz liceum.", "Kalina", "Szkoła podstawowa" %}
-
-{% testimonial "Bardzo dobra korepetytorka, pomagała mi w nauce od końca szkoły podstawowej do zakończenia nauki w liceum. Pomogła zrozumieć matematykę i zachęcić do niej. Polecam", "Norbert", "Szkoła podstawowa oraz liceum" %}
-
-{% testimonial "Pani Małgosia nie tylko pomogła mi przygotować się do matury, ale także do egzaminów poprawkowych. Gorąco polecam wszystkim, którzy chcą zrozumieć i polubić matematykę jako przedmiot.", "Przemek", "Matura" %}
-{% endtestimonials %}
-
-{% testimonialsCta "Chcesz zobaczyć więcej opinii?", "Zobacz wszystkie opinie", "https://www.e-korepetycje.net/malgorzata-swiatek/matematyka#opinie" %}
