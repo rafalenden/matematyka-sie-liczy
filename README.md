@@ -47,5 +47,5 @@ list in the front matter (`testimonials`), rendered by the layout.
   "Work with Local Repository".
 - **Production (Cloudflare Pages):** open `/admin/`, choose "Sign In Using Access Token" and paste a
   fine-grained GitHub token for this repository with *Contents: read and write*. Each save is a commit
-  to `main`, which Cloudflare Pages rebuilds automatically. For a "Sign in with GitHub" button instead,
-  deploy [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) and set `backend.base_url`.
+  to `main`, which Cloudflare Pages rebuilds automatically. Only token sign-in is enabled
+  (`auth_methods: [token]` in `admin/config.yml`).

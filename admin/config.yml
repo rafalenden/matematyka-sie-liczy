@@ -5,11 +5,9 @@ backend:
   name: github
   repo: rafenden/matematyka-sie-liczy
   branch: main
-  # For signing in with GitHub on the deployed site, deploy the OAuth
-  # helper (https://github.com/sveltia/sveltia-cms-auth) and set its URL here.
-  # Without it you can still sign in with a GitHub personal access token,
-  # or use "Work with Local Repository" in a Chromium browser.
-  # base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+  # Sign in only with a fine-grained GitHub personal access token
+  # (Contents: read and write). "Work with Local Repository" still appears on localhost.
+  auth_methods: [token]
   commit_messages:
     update: "Update {{collection}} “{{slug}}”"
 
