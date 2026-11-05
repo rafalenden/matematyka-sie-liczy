@@ -77,3 +77,10 @@ collections:
                   - { name: title, label: Nagłówek, widget: string }
                   - { name: link_text, label: Tekst przycisku, widget: string }
                   - { name: url, label: Link, widget: string }
+
+          - name: footer
+            label: Stopka
+            widget: string
+            required: false
+            default: "© {rok} Matematyka Się Liczy"
+            hint: Cały tekst stopki. Wpisz {rok}, aby wstawić bieżący rok, albo wpisz rok ręcznie.

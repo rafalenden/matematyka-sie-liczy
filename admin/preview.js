@@ -55,7 +55,7 @@
           h(Testimonials, { testimonials: data.testimonials }),
         ),
       ),
-      h('footer', { className: 'site-footer' }, `© ${new Date().getFullYear()} Matematyka Się Liczy`),
+      data.footer && h('footer', { className: 'site-footer' }, String(data.footer).replace(/\{rok\}/g, new Date().getFullYear())),
     );
   });
 })();

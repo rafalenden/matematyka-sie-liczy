@@ -62,7 +62,7 @@
     {% endif %}
   </div>
 </main>
-<footer class="site-footer">&copy; {% year %} Matematyka Się Liczy</footer>
+{% if footer %}<footer class="site-footer">{{ footer | withYear }}</footer>{% endif %}
 <a href="#" class="back-to-top" aria-label="Przewiń do góry">↑</a>
 
 <!-- Modal for image popup -->

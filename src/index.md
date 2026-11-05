@@ -2,6 +2,7 @@
 layout: layout.njk
 title: "Matematyka Się Liczy"
 intro: "Małgorzata Świątek"
+footer: "© {rok} Matematyka Się Liczy"
 contact:
   email: "kontakt@matematykasieliczy.pl"
   phone: "535 007 960"

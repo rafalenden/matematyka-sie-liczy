@@ -34,6 +34,10 @@ module.exports = function(eleventyConfig) {
 
     eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
 
+    // Tekst stopki z CMS; "{rok}" zamieniany jest na bieżący rok.
+    eleventyConfig.addFilter("withYear", (text) =>
+        String(text || "").replace(/\{rok\}/g, `${new Date().getFullYear()}`));
+
     // Karta cennika. Kolejne karty są automatycznie grupowane w siatkę (patrz transform niżej).
     // Edytowalna w Sveltia CMS jako komponent "Pozycja cennika".
     eleventyConfig.addShortcode("price", function(title, price, duration, description) {
