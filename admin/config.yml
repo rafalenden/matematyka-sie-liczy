@@ -1,84 +1,38 @@
-# Sveltia CMS configuration
-# Docs: https://github.com/sveltia/sveltia-cms
-
+# Sveltia CMS – https://sveltiacms.app
 backend:
   name: github
   repo: rafenden/matematyka-sie-liczy
   branch: main
-  # Sign in only with a fine-grained GitHub personal access token
-  # (Contents: read and write). "Work with Local Repository" still appears on localhost.
-  auth_methods: [token]
-  commit_messages:
-    update: "Update {{collection}} “{{slug}}”"
+  auth_methods: [token] # fine-grained GitHub token with "Contents: read and write"
 
 site_url: https://matematykasieliczy.pl
-display_url: https://matematykasieliczy.pl
 logo_url: /images/logo.svg
-
 media_folder: images
 public_folder: /images
-
 locale: pl
 
 collections:
   - name: pages
     label: Strony
-    label_singular: Strona
     files:
       - name: home
         label: Strona główna
         file: src/index.md
         format: frontmatter
         fields:
-          - { name: layout, label: Layout, widget: hidden, default: layout.njk }
+          - { name: layout, widget: hidden, default: layout.njk }
           - { name: title, label: Tytuł, widget: string }
           - { name: intro, label: Podtytuł, widget: string }
-
           - name: contact
             label: Kontakt
             widget: object
-            hint: >-
-              Na stronie e-mail i telefon są ukryte przed botami i pokazują się po kliknięciu.
+            hint: Na stronie e-mail i telefon są ukryte przed botami i pokazują się po kliknięciu.
             fields:
               - { name: email, label: E-mail, widget: string, required: false }
-              - { name: phone, label: Telefon, widget: string, required: false, hint: "9 cyfr, np. 123 456 789" }
-
+              - { name: phone, label: Telefon, widget: string, required: false }
           - name: body
             label: Treść
             widget: markdown
-            hint: >-
-              Karty cennika wstawisz z menu „Wstaw” (+); sąsiadujące karty układają się
-              automatycznie w siatkę. Opinie edytujesz w polu „Opinie” poniżej.
-            editor_components: [table, image, price]
-
-          - name: testimonials
-            label: Opinie
-            widget: object
-            fields:
-              - { name: heading, label: Nagłówek sekcji, widget: string }
-              - name: items
-                label: Opinie
-                label_singular: Opinię
-                widget: list
-                add_to_top: true
-                summary: "{{fields.author}} – {{fields.description}}"
-                hint: Dodawaj, usuwaj i przeciągaj opinie, aby zmienić ich kolejność.
-                fields:
-                  - { name: quote, label: Treść opinii, widget: text }
-                  - { name: author, label: Autor, widget: string }
-                  - { name: description, label: Opis autora, widget: string, required: false }
-              - name: cta
-                label: Przycisk pod opiniami
-                widget: object
-                collapsed: true
-                fields:
-                  - { name: title, label: Nagłówek, widget: string }
-                  - { name: link_text, label: Tekst przycisku, widget: string }
-                  - { name: url, label: Link, widget: string }
-
-          - name: footer
-            label: Stopka
-            widget: string
-            required: false
-            default: "© {rok} Matematyka Się Liczy"
-            hint: Cały tekst stopki. Wpisz {rok}, aby wstawić bieżący rok, albo wpisz rok ręcznie.
+            hint: Cennik, opinie i przycisk wstawisz z menu „Wstaw” (+).
+            editor_components: [pricing, testimonials, button, table, image]
+          - { name: footer, label: Stopka, widget: string, required: false, hint: "{rok} zamienia się na bieżący rok." }

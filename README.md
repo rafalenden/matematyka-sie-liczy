@@ -37,11 +37,11 @@ npm run build
 
 ## ✏️ Content editing (Sveltia CMS)
 
-Content is managed with [Sveltia CMS](https://github.com/sveltia/sveltia-cms) at `/admin`
-(config: `admin/config.yml`). Everything is edited on one CMS page, which is `src/index.md`. The body is plain Markdown. Pricing
-cards are shortcode blocks inserted from the editor (defined in `admin/editor-components.js`), and
-adjacent cards are wrapped in a grid automatically. Testimonials and the button below them are a
-list in the front matter (`testimonials`), rendered by the layout.
+Content is managed with [Sveltia CMS](https://sveltiacms.app) at `/admin` (`admin/config.yml`).
+The whole page is one Markdown file, `src/index.md`. Pricing, testimonials and the button are
+custom editor blocks (`admin/blocks.js`): each is edited in one text field (one item per line,
+values separated by `|`) and saved into the Markdown as plain HTML, so no build step or preview
+code has to understand them.
 
 - **Locally:** run `npm start`, open `http://localhost:8080/admin/` in a Chromium browser and choose
   "Work with Local Repository".
