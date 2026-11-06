@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 212 212" role="img" aria-label="Matematyka Się Liczy">
+  <!-- original tiles with a thick candy outline -->
+  <g fill="#428B7E" stroke="#f3f0e4" stroke-width="6" stroke-linejoin="round"><path d="M30 5h65v90H5V30a25 25 0 0 1 25-25z"/><path d="M105 5h65a25 25 0 0 1 25 25v65h-90z"/><path d="M5 105h90v90H30a25 25 0 0 1-25-25z"/><path d="M105 105h90v65a25 25 0 0 1-25 25h-65z"/></g>
+  <!-- + − × = -->
+  <g fill="#ffffff" stroke="#142824" stroke-width="4" stroke-linejoin="round"><path d="M25 42H42V25H58V42H75V58H58V75H42V58H25Z"/><rect x="125" y="42" width="50" height="16"/><path d="M25 42H42V25H58V42H75V58H58V75H42V58H25Z" transform="translate(50 150) rotate(45) translate(-50 -50)"/><rect x="125" y="130" width="50" height="16"/><rect x="125" y="154" width="50" height="16"/></g>
+</svg>

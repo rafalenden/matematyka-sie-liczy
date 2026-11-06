@@ -21,7 +21,10 @@
 <header class="site-header">
   <div class="hero-symbols" aria-hidden="true"><span>∑</span><span>π</span><span>√</span><span>∞</span><span>÷</span><span>x²</span><span>∫</span><span>=</span></div>
   <div class="site-header__container">
-    <img alt="Matematyka Się Liczy - Logo" class="site-logo" src="/images/logo-candy.svg">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="/images/logo-candy-dark.svg">
+      <img alt="Matematyka Się Liczy - Logo" class="site-logo" src="/images/logo-candy.svg">
+    </picture>
     {% set words = title.split(" ") %}
     <h1 class="site-title">{{ words.slice(0, -1).join(" ") }} <mark>{{ words | last }}</mark></h1>
     <h2 class="site-subtitle">{{ subtitle }}</h2>
