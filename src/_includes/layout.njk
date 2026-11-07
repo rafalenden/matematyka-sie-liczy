@@ -41,7 +41,7 @@
 </header>
 <main>
   <div class="container">
-    {% if intro %}<p class="lead">{{ intro }}</p>{% endif %}
+    {% if intro %}<p class="lead">{{ intro | highlight | safe }}</p>{% endif %}
     {{ content | safe }}
   </div>
 </main>

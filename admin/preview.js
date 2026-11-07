@@ -22,7 +22,7 @@ CMS.registerPreviewTemplate('home', ({ entry, widgetFor }) => {
         ),
       ),
     ),
-    h('main', null, h('div', { className: 'container' }, d.intro && h('p', { className: 'lead' }, d.intro), widgetFor('body'))),
+    h('main', null, h('div', { className: 'container' }, d.intro && h('p', { className: 'lead' }, String(d.intro).split(/\*\*(.+?)\*\*/).map((part, i) => (i % 2 ? h('mark', { key: i }, part) : part))), widgetFor('body'))),
     d.footer && h('footer', { className: 'site-footer' }, String(d.footer).replaceAll('{rok}', new Date().getFullYear())),
   );
 });

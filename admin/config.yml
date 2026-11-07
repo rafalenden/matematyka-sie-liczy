@@ -23,7 +23,7 @@ collections:
           - { name: layout, widget: hidden, default: layout.njk }
           - { name: title, label: Tytuł, widget: string }
           - { name: subtitle, label: Podtytuł, widget: string }
-          - { name: intro, label: Intro, widget: text, required: false, hint: Wprowadzenie wyświetlane pod przyciskami kontaktu. }
+          - { name: intro, label: Intro, widget: text, required: false, hint: Wprowadzenie pod przyciskami kontaktu. Fragment w **gwiazdkach** zostanie podświetlony. }
           - name: contact
             label: Kontakt
             widget: object

@@ -286,16 +286,31 @@ main { counter-reset: section; }
   transform: rotate(-2deg);
 }
 
-/* intro: a centred lead under the header, no box */
+/* intro: a big centred statement written on every other grid line, no box */
 .container > .lead {
-  max-width: 760px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
-  font-weight: 600;
-  color: var(--ink-soft);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: calc(var(--row) * 2);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.lead mark {
+  padding: 0.05em 0.2em;
+  color: #1d2742;
+  background: linear-gradient(transparent 12%, var(--marker) 12%, var(--marker) 90%, transparent 90%);
+  border-radius: 6px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@media (max-width: 700px) {
+  .container > .lead { font-size: 1.3rem; line-height: var(--row); }
 }
 
 .container h3 {
